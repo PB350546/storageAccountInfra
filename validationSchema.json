@@ -1,0 +1,145 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "ResourceGroup",
+    "type": "object",
+    "properties": {
+      "resourceGroupName": {
+        "type": "string"
+      },
+      "resourceGroupLocation": {
+        "type": "string"
+      },
+      "tags": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "storageAccount": {
+        "type": "object",
+        "properties": {
+          "storageAccountType": {
+            "type": "string"
+          },
+          "storageAccountName": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "publicNetworkAccess": {
+            "type": "string",
+            "enum": ["Enabled", "Disabled"]
+          },
+          "minimumTlsVersion": {
+            "type": "string",
+            "enum": ["TLS1_0", "TLS1_1", "TLS1_2"]
+          },
+          "defaultAction": {
+            "type": "string",
+            "enum": ["Allow", "Deny"]
+          },
+          "bypass": {
+            "type": "string",
+            "enum": ["AzureServices", "Logging", "Metrics", "None"]
+          },
+          "virtualNetworkRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "required": ["id"]
+            }
+          },
+          "ipRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": ["value"]
+            }
+          },
+          "cmk": {
+            "type": "object",
+            "properties": {
+              "isUserEncryption": {
+                "type": "boolean"
+              },
+              "keyName": {
+                "type": "string"
+              },
+              "keyVersion": {
+                "type": "string"
+              },
+              "keyVaultUri": {
+                "type": "string"
+              },
+              "userAssignedIdentity": {
+                "type": "string"
+              },
+              "systemAssignedIdentity": {
+                "type": "boolean"
+              }
+            }
+          },
+          "identity": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["SystemAssigned", "UserAssigned", "SystemAssigned,UserAssigned", "None"]
+              },
+              "userAssignedIdentities": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "storageDiagnosticsSettings": {
+            "type": "object",
+            "properties": {
+              "blobDiagnostics": {
+                "type": "boolean"
+              },
+              "logAnalyticsWorkspaceId": {
+                "type": "string"
+              },
+              "eventHubAuthorizationRuleId": {
+                "type": "string"
+              },
+              "eventHubName": {
+                "type": "string"
+              }
+            }
+          },
+          "containers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": ["name"]
+            }
+          }
+        }
+      }
+    },
+    "required": ["resourceGroupName", "resourceGroupLocation"]
+  }
+  
