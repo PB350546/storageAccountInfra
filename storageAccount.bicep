@@ -56,8 +56,8 @@ var systemIdentityEncryption= {
   keySource: 'Microsoft.Keyvault'
   keyvaultproperties: keyvaultproperties
   identity: {
-    systemAssignedIdentity: 'Enabled' 
-    // This property is not available in documentation so not completely sure about it.
+    systemAssignedIdentity: true 
+    // This property is not available in documentation and is default way for encryption so not completely sure about it.
     // Document refered : https://learn.microsoft.com/en-us/azure/templates/microsoft.storage/storageaccounts?pivots=deployment-language-bicep
   }
 }
