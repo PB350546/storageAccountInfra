@@ -1,0 +1,67 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "resourceGroup": {
+      "value": {
+        "resourceGroupName": "accenture-d-rg",
+        "resourceGroupLocation": "westeurope",
+        "tags": {
+            "environment": "dev"
+        },
+        "storageAccount": {
+            "storageAccountType": "Standard_LRS",
+            "storageAccountName": "accenturedsa",
+            
+            "tags": {
+                "resource": "storage"
+            },
+            "publicNetworkAccess": "Enabled",
+            "minimumTlsVersion": "TLS1_2",
+            "defaultAction": "Allow",
+            "bypass": "AzureServices",
+            "virtualNetworkRules": [
+                {
+                "id": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/virtualNetworks/<vnet-name>/subnets/<subnet-name>"
+                }
+            ],
+            "ipRules": [
+                {
+                "value": "192.168.1.1"
+                }
+            ],
+            "cmk": {
+                "isUserEncryption": true,
+                "keyName": "myKey",
+                "keyVersion": "1",
+                "keyVaultUri": "https://mykeyvault.vault.azure.net/",
+                "userAssignedIdentity": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<identity-name>"
+            },
+            "identity": {
+                "type": "SystemAssigned,UserAssigned",
+                "userAssignedIdentities": {
+                    "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<identity-name>": {}
+                }
+            },
+            "storageDiagnosticsSettings": {
+                "blobDiagnostics": true,
+                "logAnalyticsWorkspaceId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OperationalInsights/workspaces/<workspaceName>",
+                "eventHubAuthorizationRuleId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventHub/namespaces/<namespaceName>/eventhubs/<eventHubName>/authorizationRules/<authorizationRuleName>" ,
+                "eventHubName": "storageEventHub"
+            },
+            "containers": [
+                {
+                "name": "container1"
+                },
+                {
+                "name": "container2"
+                },
+                {
+                "name": "container3"
+                }
+            ]
+        }
+      }
+    }
+    }
+  }
