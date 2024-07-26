@@ -18,7 +18,7 @@ resource resourceGroupCreate 'Microsoft.Resources/resourceGroups@2024-03-01' = {
 }
 
 // Resource module for creation of Storage account under ResourceGroup Scope
-module storageAccount './storageAccount.bicep' = {
+module storageAccount 'storageAccount.bicep' = {
   name: 'storageAccount'
   scope: resourceGroupCreate
   params: {
